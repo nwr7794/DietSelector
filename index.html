@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+<!--
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+
+<head>
+	<title>Diet Selector</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+</head>
+
+<body class="subpage">
+
+	<!-- Header -->
+	<header id="header">
+		<!-- <nav class="left">
+			<a href="#menu"><span>Menu</span></a>
+		</nav> -->
+		<a class="logo">Diet Selector</a>
+
+	</header>
+
+	<!-- Main -->
+	<section id="main" class="wrapper">
+		<div class="inner">
+			<header class="align-center">
+				<h1>Find the weight loss diet that fits <u>YOUR</u> lifestyle</h1>
+			</header>
+		</div>
+
+		<!-- User inputs -->
+		<div class="align-center" id="quizInputs">
+
+			<!-- Weight loss speed -->
+			<b>How quickly do you want to lose weight?</b><br> Faster weight loss usually requires larger dietary
+			changes.
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="speed" id="speed_ass">
+					<option value="1">No rush (6+ months)</option>
+					<option value="2">Easing into it (3-5 months)</option>
+					<option value="3" selected>Moderately quickly (2-3 months)</option>
+					<option value="4">Very quickly (3-6 weeks)</option>
+					<option value="5">ASAP (&lt;3 weeks)</option>
+				</select>
+			</div>
+
+			<br>
+			<!-- Food intake flexibility? -->
+			<b>Are you ok restricting how much food you eat, or would you prefer a more flexible approach to
+				quantity?</b>
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="quantity" id="quantity_ass">
+					<option value="1">Eat as much as I want</option>
+					<option value="2">Eat almost as much as I want</option>
+					<option value="3" selected>Ok with moderate restriction</option>
+					<option value="4">Ok with severe restriction</option>
+					<option value="5">I'll eat as little as required</option>
+				</select>
+			</div>
+
+			<br>
+			<!-- Food logging -->
+			<b>Are you willing to record what food you eat everyday in an app?</b>
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="logging" id="logging_ass">
+					<option value="1" selected>No</option>
+					<option value="5">Yes</option>
+				</select>
+			</div>
+
+			<br>
+			<!-- When you eat -->
+			<b>Are you willing to stick to an eating schedule during the day?</b>
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="timing" id="timing_ass">
+					<option value="1" selected>No, eat whenever I want</option>
+					<option value="5">Yes, eat when specified</option>
+				</select>
+			</div>
+
+			<br>
+			<!-- Vegetarian -->
+			<b>Are you a vegetarian?</b>
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="vegetarian" id="vegetarian_ass">
+					<option value="1" selected>No</option>
+					<option value="5">Yes</option>
+				</select>
+			</div>
+
+			<br>
+			<!-- Commercial -->
+			<b>Are you willing to pay for a commercial dieting service (ex: Weight Watchers)?</b>
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="commercial" id="commercial_ass" onchange="comm_change();">
+					<option id="comm1" value="1" selected>No</option>
+					<option id="comm2" value="5">Yes</option>
+				</select>
+			</div>
+
+
+			<div id=comm_plan_div></div>
+
+
+			<br>
+			<!-- Food groups -->
+			<b>Select any of the following food groups which you <b style="color: red;">REFUSE</b> to give up:</b>
+			<br>
+			<br>
+
+
+			<ul class="alt" style="border: solid 1px #101111; width: 300px; margin: auto;">
+				<li><input type="checkbox" name="Sugar" id="keep_sugar">
+					<label for="keep_sugar"><b style="color: red;">Sugar</b> (Baked goods, candy, soda, fruit juice,
+						energy
+						drinks...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Processed" id="keep_processed">
+					<label for="keep_processed"><b style="color: red;">Processed food</b> (Chips, cheez its, pretzels,
+						granola
+						bars...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Refined Grains" id="keep_refined">
+					<label for="keep_refined"><b style="color: red;">Refined grains</b> (White bread, white rice, pasta,
+						tortillas,
+						bagels...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Whole Grains" id="keep_whole">
+					<label for="keep_whole"><b style="color: red;">Whole grains</b> (Whole wheat bread, borwn rice,
+						whole wheat pasta,
+						oatmeal...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Artificial Sweeteners" id="keep_artificial">
+					<label for="keep_artificial"><b style="color: red;">Artificial sweeteners</b> (Diet soda, diet
+						energy drinks,
+						splenda...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Starchy Vegetables" id="keep_starch">
+					<label for="keep_starch"><b style="color: red;">Starchy vegetables</b> (Corn, potatoes, sweet
+						potatoes,
+						beets...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Legumes" id="keep_legumes">
+					<label for="keep_legumes"><b style="color: red;">Legumes</b> (Beans, lentils, nuts, peas...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Dairy" id="keep_dairy">
+					<label for="keep_dairy"><b style="color: red;">Dairy</b> (Milk, milk alternatives like almond,
+						cream, yogurt,
+						cheese...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Fruit" id="keep_fruit">
+					<label for="keep_fruit"><b style="color: red;">Fruit</b> (Apples, bananas, berries...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="High Fat" id="keep_fat">
+					<label for="keep_fat"><b style="color: red;">High Fat</b> (Butter,cocunot oil, full fat dairy
+						products...)</label>
+				</li>
+				<li>
+					<input type="checkbox" name="Alcohol" id="keep_alc">
+					<label for="keep_alc"><b style="color: red;">Alcohol</b> (Beer, wine, spirits...)</label>
+				</li>
+			</ul>
+
+			<br>
+			<!-- Gender -->
+			<b>What gender are you?</b>
+			<br>
+			<div class="select-wrapper" style="width: 300px; margin: 0 auto;">
+				<select name="gender" id="gender_ass">
+					<option value="1" selected>Female</option>
+					<option value="3">Male</option>
+					<option value="5">Prefer not to say</option>
+				</select>
+			</div>
+
+			<br>
+			<!-- Age -->
+			<b>How old are you?</b>
+			<br>
+			<div style="width: 300px; margin: 0 auto;">
+				<input type="number" id="age_ass" min="18">
+			</div>
+
+			<br>
+			<!-- Email -->
+			<b>Want to stay updated on our latest health products?</b>
+			<br>
+			<div style="width: 300px; margin: 0 auto;">
+				<input type="email" id="email_ass" placeholder="Enter email here (Optional)">
+			</div>
+
+			<br>
+			<button class="button" id="buttonModel">See your results!</button>
+			<br><br>
+
+		</div>
+
+
+		<!-- Quiz output -->
+		<div id="quizOutput" class="align-center" style="display: none;">
+			<div class="table-wrapper">
+				<table style="
+							width: fit-content;
+							max-width: min(max-content,100%);
+							/* white-space: nowrap; */
+							margin: auto;">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Score</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody id="outputTableBody" style="text-align: left;">
+					</tbody>
+				</table>
+			</div>
+
+			<br>
+			<button class="button" id="buttonRevert">Edit Preferences</button>
+
+			<!-- <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScmwJZd7p5ILFMz9syOZOG0iixGucB0mXa1nErzKUwXZbAltw/viewform?embedded=true" width="300" height="379" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe> -->
+
+			<br><br><br><br>
+
+			<div class="12u$">
+				<h3>Unhappy with out diet selector tool?</h3>
+				<h3 style="color: orange;">Tell us how we can improve!</h3>
+				<h4>Email us at: tradethemacro@gmail.com</h4>
+			</div>
+
+			<!-- <div class="12u$">
+				<h3>Tell us how we can improve!</h3>
+				<textarea name="userFeedback" id="userFeedback" placeholder="Leave your feedback here." rows="6"
+					style="width: 90%; margin: auto;"></textarea>
+				<br>
+				<button class="button special" id="userFeedbackSubmit">Submit</button>
+			</div> -->
+			<!-- 
+			<form action="">
+				<label for="fname">First name:</label><br>
+				<input type="text" id="userFeedback" name="userFeedback"><br>
+				</form> -->
+
+			<br>
+
+		</div>
+
+	</section>
+
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="inner">
+			<h2>Get In Touch</h2>
+			<ul class="actions">
+				<li><span class="icon fa-twitter"></span> <a href="https://twitter.com/hedgefnddropout"
+						target="_blank">Twitter</a></li>
+			</ul>
+		</div>
+	</footer>
+
+	<!-- Base Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+	<!-- Load AWS required packages -->
+	<!-- <script src="assets/js/vendor/aws-cognito-sdk.min.js"></script> -->
+	<!-- <script src="assets/js/vendor/amazon-cognito-identity.min.js"></script> -->
+	<script src="assets/js/config.js"></script>
+	<!-- <script src="assets/js/cognito-auth.js"></script> -->
+
+	<!-- Custom Scripts -->
+	<script src="assets/js/general.js"></script>
+	<script src="assets/js/model.js"></script>
+	<!-- <script src="assets/js/userLog.js"></script> -->
+
+
+</body>
+
+</html>
