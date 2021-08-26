@@ -229,9 +229,9 @@
         var userInputs = { 'speed': speed, 'quantity': quantity, 'logging': logging, 'timing': timing, 'vegetarian': vegetarian, 'commercial': commercial, 'prepared': prepared, 'food_keep': food_keep, 'diet_output': diet_output, 'gender': gender,'age': age,'email': email}
 
         // pausing during testing so I don't fill the database with noisy data
-        console.log("Currently pausing DB data logging for testing purposes")
-        console.log(userInputs)
-        // dataLog(userInputs)
+        // console.log("Currently pausing DB data logging for testing purposes")
+        // console.log(userInputs)
+        dataLog(userInputs)
     }
 
 
