@@ -10,9 +10,12 @@
     // Grab the dietDB data during page load
     $(function onDocReady() {
 
+        var keyProd = 'AIzaSyDaqR3scLgh4Dw26glrQ2BfDHiMJKzDIz4'
+        var keyTest = 'AIzaSyAGYgfzU5Lo2-OsFVMySI7UNzjxl_4EkQQ' ///////////////////////////////////////// Make sure right one active pre-commit
+
         dietDB = $.ajax({
             method: 'GET',
-            url: 'https://sheets.googleapis.com/v4/spreadsheets/1pw9VzJoItk1Cem9gDx7Z7M-Zk1RxFl8H2BykSy1BOX8/values/DB!A1:O23?majorDimension=ROWS&key=AIzaSyDaqR3scLgh4Dw26glrQ2BfDHiMJKzDIz4',
+            url: 'https://sheets.googleapis.com/v4/spreadsheets/1pw9VzJoItk1Cem9gDx7Z7M-Zk1RxFl8H2BykSy1BOX8/values/DB!A1:O23?majorDimension=ROWS&key=' + keyProd,
             // contentType: 'application/json',
             success: console.log('success'),
             error: function ajaxError(jqXHR, textStatus, errorThrown) {
@@ -65,14 +68,12 @@
             }
         }
 
-        // console.log(food_keep)
-
-        // food_keep now has food groups the user has requested will not be removed
-        // At this point we have all the user assumptions
-
-
-        // Now need to design the model for ranking diets, then implement it.
-        // Should try to score each diet to a total number of points
+        // Set user output summary variables
+        document.getElementById('outSpeed').value = speed*20
+        document.getElementById('outQuantity').value = quantity*20
+        document.getElementById('outLogging').value = (logging*20 - 20)*1.25 + 1
+        document.getElementById('outTime').value = (logging*20 - 20)*1.25 + 1
+        document.getElementById('outCommercial').value = (logging*20 - 20)*1.25 + 1
 
         // Say every diet starts with a perfect score (42 points)
         // Speed - Deduct: Abs(Speed diet - speed assumption)
@@ -235,28 +236,7 @@
     }
 
 
-    // LEFT OFF HERE - To do: Host on AWS, then figure out best way to record user data? Add animation for shifting between inputs/outputs, 
-    // and revealing the comm food service square
-    //// 1. Fix removed food categories format - turn into dropdown menu and make sure formatting consistent with the above
-    // 2. Add more user pref variables
-    // 3. Ask for current user diet as one potential input variable
-    // 4. Blur results and ask for user email to get full report
-    // 5. Add user tracking method before sharing - need to collect as much data as possible!
-    // 6. Commit to github and host so can generate AWS link for sharing/feedback purposes
-
-    // Sabrina notes
-    ///// Change weight loss speed to time periods
-    // Shorten reuslt list
-    // Add bullet point description to results
-
-
-
-
 }(jQuery));
 
 
 
-
-
-// - Each input value
-// - The top 5 output diets (create IDs)

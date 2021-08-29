@@ -11,6 +11,18 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="assets/css/main.css" />
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYYV41E191"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
+
+		gtag('config', 'G-ZYYV41E191');
+	</script>
+
+
 </head>
 
 <body class="subpage">
@@ -217,6 +229,20 @@
 
 		<!-- Quiz output -->
 		<div id="quizOutput" class="align-center" style="display: none;">
+			<!-- <h3 style="color: orange;">Your preferences</h3> -->
+			<!-- Add user profile here -->
+			<label style="margin: 0%;" for="outSpeed">Desired weight loss speed:</label>
+			Slow&nbsp;&nbsp;<progress id="outSpeed" max="100"></progress>&nbsp;&nbsp;Fast			
+			<label style="margin: 0%;" for="outQuantity">Eating quantity:</label>
+			No limit&nbsp;&nbsp;<progress id="outQuantity" max="100"></progress>&nbsp;&nbsp;Limited			
+			<label style="margin: 0%;" for="outLogging">Willing to food log:</label>
+			No&nbsp;&nbsp;<progress id="outLogging" value="50" max="100"></progress>&nbsp;&nbsp;Yes			
+			<label style="margin: 0%;" for="outTime">When you eat:</label>
+			Anytime&nbsp;&nbsp;<progress id="outTime" value="50" max="100"></progress>&nbsp;&nbsp;Planned			
+			<label style="margin: 0%;" for="outCommercial">Willing to pay for plan:</label>
+			No&nbsp;&nbsp;<progress id="outCommercial" value="1" max="100"></progress>&nbsp;&nbsp;Yes			
+			<br><br><br>
+
 			<div class="table-wrapper">
 				<table style="
 							width: fit-content;
@@ -226,7 +252,7 @@
 					<thead>
 						<tr>
 							<th>Name</th>
-							<th>Score</th>
+							<th>Lifestyle Fit</th>
 							<th>Description</th>
 						</tr>
 					</thead>
@@ -245,7 +271,7 @@
 			<div class="12u$">
 				<h3>Unhappy with out diet selector tool?</h3>
 				<h3 style="color: orange;">Tell us how we can improve!</h3>
-				<h4>Email us at: tradethemacro@gmail.com</h4>
+				<h4>Email us at: thedietselector@gmail.com</h4>
 			</div>
 
 			<!-- <div class="12u$">
@@ -272,6 +298,7 @@
 		<div class="inner">
 			<h2>Get In Touch</h2>
 			<ul class="actions">
+				<li><a href="mailto: thedietselector@gmail.com">Email</a></li>
 				<li><span class="icon fa-twitter"></span> <a href="https://twitter.com/hedgefnddropout"
 						target="_blank">Twitter</a></li>
 			</ul>
