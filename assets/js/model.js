@@ -113,7 +113,7 @@
             score = score - Math.max(data[i][6] - quantity, 0)
             score = score - Math.max(data[i][7] - logging, 0)
             score = score - Math.max(data[i][12] - timing, 0)
-            score = score - Math.max(vegetarian - data[i][9], 0)
+            score = score - Math.max(vegetarian - data[i][9], 0)*2
             if (commercial == 1 & data[i][4] == 'Yes') {
                 score = score - 10
             } else if (prepared == 1 & data[i][5] == 'Yes') {
