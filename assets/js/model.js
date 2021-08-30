@@ -69,11 +69,11 @@
         }
 
         // Set user output summary variables
-        document.getElementById('outSpeed').value = (speed-1)*20 + 1
-        document.getElementById('outQuantity').value = (quantity-1)*20 + 1
-        document.getElementById('outLogging').value = (logging-1)*20 + 1
-        document.getElementById('outTime').value = (timing-1)*20 + 1
-        document.getElementById('outCommercial').value = (commercial-1)*20 + 1
+        document.getElementById('outSpeed').value = (speed-1)*20 + 3
+        document.getElementById('outQuantity').value = (quantity-1)*20 + 3
+        document.getElementById('outLogging').value = (logging-1)*20 + 3
+        document.getElementById('outTime').value = (timing-1)*20 + 3
+        document.getElementById('outCommercial').value = (commercial-1)*20 + 3
 
         // Say every diet starts with a perfect score (42 points)
         // Speed - Deduct: Abs(Speed diet - speed assumption)
