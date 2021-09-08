@@ -7,9 +7,11 @@
 <html>
 
 <head>
-	<title>Diet Selector</title>
+	<title>The Diet Selector: Find the weight loss diet that best fits your lifestyle.</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="The Diet Selector helps people who want to lose weight find the diet that best fits their lifestyle. 
+	Don't want to log calories or give up certain foods? We will find the best diet for you.">
 	<link rel="stylesheet" href="assets/css/main.css" />
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -21,8 +23,7 @@
 
 		gtag('config', 'G-ZYYV41E191');
 	</script>
-
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 </head>
 
 <body class="subpage">
@@ -32,7 +33,7 @@
 		<!-- <nav class="left">
 			<a href="#menu"><span>Menu</span></a>
 		</nav> -->
-		<a class="logo">Diet Selector</a>
+		<a class="logo">The Diet Selector</a>
 
 	</header>
 
@@ -40,9 +41,11 @@
 	<section id="main" class="wrapper">
 		<div class="inner">
 			<header class="align-center">
-				<h1>Find the weight loss diet that fits <u>YOUR</u> lifestyle</h1>
+				<h1>Find the weight loss diet that fits <u>Your lifestyle</u></h1>
 			</header>
 		</div>
+
+		<hr>
 
 		<!-- User inputs -->
 		<div class="align-center" id="quizInputs">
@@ -209,7 +212,7 @@
 			<b>How old are you?</b>
 			<br>
 			<div style="width: 300px; margin: 0 auto;">
-				<input type="number" id="age_ass" min="18">
+				<input type="text" id="age_ass" placeholder="Enter age here">
 			</div>
 
 			<br>
@@ -229,20 +232,27 @@
 
 		<!-- Quiz output -->
 		<div id="quizOutput" class="align-center" style="display: none;">
-			<h4 style="color: orange;">Your preferences</h4>
+			<h2 style="color: orange;">Your Diets!</h2>
 			<!-- Add user profile here -->
-			<label style="margin: 0%;" for="outSpeed">Desired weight loss speed:</label>
-			Slow&nbsp;&nbsp;<progress id="outSpeed" max="83"></progress>&nbsp;&nbsp;Fast			
+			<!-- <label style="margin: 0%;" for="outSpeed">Desired weight loss speed:</label>
+			Slow&nbsp;&nbsp;<progress id="outSpeed" max="83"></progress>&nbsp;&nbsp;Fast
 			<label style="margin: 0%;" for="outQuantity">Eating quantity:</label>
-			No limit&nbsp;&nbsp;<progress id="outQuantity" max="83"></progress>&nbsp;&nbsp;Limited			
+			No limit&nbsp;&nbsp;<progress id="outQuantity" max="83"></progress>&nbsp;&nbsp;Limited
 			<label style="margin: 0%;" for="outLogging">Willing to food log:</label>
-			No&nbsp;&nbsp;<progress id="outLogging" max="83"></progress>&nbsp;&nbsp;Yes			
+			No&nbsp;&nbsp;<progress id="outLogging" max="83"></progress>&nbsp;&nbsp;Yes
 			<label style="margin: 0%;" for="outTime">When you eat:</label>
-			Anytime&nbsp;&nbsp;<progress id="outTime" max="83"></progress>&nbsp;&nbsp;Planned			
+			Anytime&nbsp;&nbsp;<progress id="outTime" max="83"></progress>&nbsp;&nbsp;Planned
 			<label style="margin: 0%;" for="outCommercial">Willing to pay for plan:</label>
-			No&nbsp;&nbsp;<progress id="outCommercial" max="83"></progress>&nbsp;&nbsp;Yes			
-			<br><br><br>
+			No&nbsp;&nbsp;<progress id="outCommercial" max="83"></progress>&nbsp;&nbsp;Yes
+			<br><br><br> -->
 
+
+						<!-- Bar chart with user prefs and output -->
+						<canvas id="prefsChart"
+						style="width:100%;min-height: 300px; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+					<br>
+
+			<!-- Output table -->
 			<div class="table-wrapper">
 				<table style="
 							width: fit-content;
@@ -252,7 +262,7 @@
 					<thead>
 						<tr>
 							<th>Name</th>
-							<th>Lifestyle Fit</th>
+							<!-- <th>Lifestyle Fit</th> -->
 							<th>Description</th>
 						</tr>
 					</thead>
@@ -264,10 +274,10 @@
 			<br>
 			<button class="button" id="buttonRevert">Edit Preferences</button>
 
-			<br><br><br><br>
+			<br><br><br><br><br><br>
 
 			<div class="12u$">
-				<h3>Unhappy with out diet selector tool?</h3>
+				<h3>Unhappy with our diet selector tool?</h3>
 				<h3 style="color: orange;">Tell us how we can improve!</h3>
 				<h4>Email us at: thedietselector@gmail.com</h4>
 			</div>

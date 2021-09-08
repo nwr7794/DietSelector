@@ -69,11 +69,11 @@
         }
 
         // Set user output summary variables
-        document.getElementById('outSpeed').value = (speed-1)*20 + 3
-        document.getElementById('outQuantity').value = (quantity-1)*20 + 3
-        document.getElementById('outLogging').value = (logging-1)*20 + 3
-        document.getElementById('outTime').value = (timing-1)*20 + 3
-        document.getElementById('outCommercial').value = (commercial-1)*20 + 3
+        // document.getElementById('outSpeed').value = (speed - 1) * 20 + 3
+        // document.getElementById('outQuantity').value = (quantity - 1) * 20 + 3
+        // document.getElementById('outLogging').value = (logging - 1) * 20 + 3
+        // document.getElementById('outTime').value = (timing - 1) * 20 + 3
+        // document.getElementById('outCommercial').value = (commercial - 1) * 20 + 3
 
         // Say every diet starts with a perfect score (42 points)
         // Speed - Deduct: Abs(Speed diet - speed assumption)
@@ -113,9 +113,11 @@
             score = score - Math.max(data[i][6] - quantity, 0)
             score = score - Math.max(data[i][7] - logging, 0)
             score = score - Math.max(data[i][12] - timing, 0)
-            score = score - Math.max(vegetarian - data[i][9], 0)*2
+            score = score - Math.max(vegetarian - data[i][9], 0) * 2
+            var commBarChart = 1
             if (commercial == 1 & data[i][4] == 'Yes') {
                 score = score - 10
+                commBarChart = 5
             } else if (prepared == 1 & data[i][5] == 'Yes') {
                 score = score - 10
             }
@@ -136,7 +138,8 @@
             linkOutput.innerHTML = name
 
             // Add output diet characteristics to array
-            outputDiets.push([linkOutput.outerHTML, score, dietID, adherence, Math.round(score / maxScore * 100) + "%", blurb])
+            outputDiets.push([linkOutput.outerHTML, score, dietID, adherence, Math.round(score / maxScore * 100) + "%", blurb
+                , data[i][10], data[i][6], data[i][7], data[i][12], commBarChart, name])
         }
 
         // Sort by score descending, then adherence difficulty as tie-breaker
@@ -147,11 +150,72 @@
             return b[1] - a[1];
         });
 
-        // Only show top 5
-        var sortedOutput = sortedOutput1.slice(0, 6)
+        // Only show top 3
+        var sortedOutput = sortedOutput1.slice(0, 4)
 
         var outputDietIDs_tmp = sortedOutput.map(x => parseInt(x[2]))
-        var outputDietIDs = outputDietIDs_tmp.slice(1,6)
+        var outputDietIDs = outputDietIDs_tmp.slice(1, 4)
+
+
+
+        // Diet Name, pref values and diet values. Speed, quantity, schedule
+        // Create bar chart of user prefs and output diets
+        var ctx = document.getElementById("prefsChart").getContext("2d");
+
+        var chartData = {
+            labels: ["Weight Loss Speed", "Eating Quantity", "Food Logging", "Eating Schedule?", "Pay For Plan?"],
+            datasets: [
+                {
+                    label: "Your Preference",
+                    backgroundColor: "blue",
+                    data: [speed, quantity, logging, timing, commercial]
+                }, {
+                    label: sortedOutput[1][11],
+                    backgroundColor: "red",
+                    data: [sortedOutput[1][6], sortedOutput[1][7], sortedOutput[1][8], sortedOutput[1][9], sortedOutput[1][10]]
+                }, {
+                    label: sortedOutput[2][11],
+                    backgroundColor: "green",
+                    data: [sortedOutput[2][6], sortedOutput[2][7], sortedOutput[2][8], sortedOutput[2][9], sortedOutput[2][10]]
+                }, {
+                    label: sortedOutput[3][11],
+                    backgroundColor: "orange",
+                    data: [sortedOutput[3][6], sortedOutput[3][7], sortedOutput[3][8], sortedOutput[3][9], sortedOutput[3][10]]
+                }
+                // , {
+                //     label: sortedOutput[4][11],
+                //     backgroundColor: "yellow",
+                //     data: [sortedOutput[4][6], sortedOutput[4][7], sortedOutput[4][8], sortedOutput[4][9], sortedOutput[4][10]]
+                // }
+                // , {
+                //     label: sortedOutput[5][11],
+                //     backgroundColor: "purple",
+                //     data: [sortedOutput[5][6], sortedOutput[5][7], sortedOutput[5][8], sortedOutput[5][9], sortedOutput[5][10]]
+                // }
+            ]
+        };
+
+        var myBarChart = new Chart(ctx, {
+            type: 'horizontalBar',
+            data: chartData,
+            options: {
+                // barValueSpacing: 20,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 5
+                        },
+                        display: false
+                    }]
+                }
+            }
+        });
+        // End of bar chart code
+
+
+
+
 
 
         // Now push results to quizOutput div, then hide quizInputs and show quizOutput
@@ -159,7 +223,9 @@
         // Clear table body
         $("#outputTableBody").empty();
 
-        var table_cols = [0, 4, 5]
+        // Removed score for now
+        var table_cols = [0, 5]
+        // var table_cols = [0, 4, 5]
         var table_body = document.getElementById('outputTableBody');
         for (i = 1; i < sortedOutput.length; i++) {
             var tr = table_body.insertRow(-1)
@@ -174,7 +240,7 @@
 
 
         // Run the logging function on click
-        handleAddData(food_keep,outputDietIDs);
+        handleAddData(food_keep, outputDietIDs);
 
 
 
@@ -192,7 +258,7 @@
                 Logging: userInputs.logging,
                 Timing: userInputs.timing,
                 Vegetarian: userInputs.vegetarian,
-                Commercial: userInputs.commerical,
+                Commercial: userInputs.commercial,
                 Prepared: userInputs.prepared,
                 Food_keep: userInputs.food_keep,
                 Diet_output: userInputs.diet_output,
@@ -214,7 +280,7 @@
         console.log('Successful')
     }
 
-    function handleAddData(food_agg,diet_agg) {
+    function handleAddData(food_agg, diet_agg) {
         var speed = $('#speed_ass').val();
         var quantity = $('#quantity_ass').val();
         var logging = $('#logging_ass').val();
@@ -227,7 +293,7 @@
         var gender = $('#gender_ass').val();
         var age = $('#age_ass').val();
         var email = $('#email_ass').val();
-        var userInputs = { 'speed': speed, 'quantity': quantity, 'logging': logging, 'timing': timing, 'vegetarian': vegetarian, 'commercial': commercial, 'prepared': prepared, 'food_keep': food_keep, 'diet_output': diet_output, 'gender': gender,'age': age,'email': email}
+        var userInputs = { 'speed': speed, 'quantity': quantity, 'logging': logging, 'timing': timing, 'vegetarian': vegetarian, 'commercial': commercial, 'prepared': prepared, 'food_keep': food_keep, 'diet_output': diet_output, 'gender': gender, 'age': age, 'email': email }
 
         // pausing during testing so I don't fill the database with noisy data
         // console.log("Currently pausing DB data logging for testing purposes")
