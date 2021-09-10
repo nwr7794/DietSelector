@@ -29,10 +29,10 @@
         $('#buttonModel').click(dietModel);
         $('#buttonRevert').click(dietRevert);
         // Track link clicks - later will add logging for this
-        $(document).delegate('a', 'click', function (e) {
-            console.log(e.target.id + ' clicked');
-            // alert(e.target.nodeName + ' clicked and "this" points to ' + this.nodeName);
-        });
+        // $(document).delegate('a', 'click', function (e) {
+        //     console.log(e.target.id + ' clicked');
+        //     // alert(e.target.nodeName + ' clicked and "this" points to ' + this.nodeName);
+        // });
 
     });
 
@@ -137,8 +137,14 @@
             linkOutput.setAttribute('target', '_blank')
             linkOutput.innerHTML = name
 
+            var buttonOutput = document.createElement('a')
+            buttonOutput.setAttribute('class', 'button small')
+            buttonOutput.setAttribute('href', 'diet.html?diet=' + dietID)
+            buttonOutput.innerHTML = 'Start'
+
+
             // Add output diet characteristics to array
-            outputDiets.push([linkOutput.outerHTML, score, dietID, adherence, Math.round(score / maxScore * 100) + "%", blurb
+            outputDiets.push([linkOutput.outerHTML, score, dietID, adherence, buttonOutput.outerHTML, blurb
                 , data[i][10], data[i][6], data[i][7], data[i][12], commBarChart, name])
         }
 
@@ -223,9 +229,8 @@
         // Clear table body
         $("#outputTableBody").empty();
 
-        // Removed score for now
-        var table_cols = [0, 5]
-        // var table_cols = [0, 4, 5]
+
+        var table_cols = [0, 4, 5]
         var table_body = document.getElementById('outputTableBody');
         for (i = 1; i < sortedOutput.length; i++) {
             var tr = table_body.insertRow(-1)
@@ -271,7 +276,7 @@
             error: function ajaxError(jqXHR, textStatus, errorThrown) {
                 console.error('Error logging: ', textStatus, ', Details: ', errorThrown);
                 console.error('Response: ', jqXHR.responseText);
-                alert('An error occured when logging data:\n' + jqXHR.responseText);
+                // alert('An error occured when logging data:\n' + jqXHR.responseText);
             }
         });
     }

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<!--
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+
+<head>
+    <title>The Diet Selector - Start your weight loss journey today.</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The Diet Implementor helps people stick to their chosen diet for weight loss.">
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYYV41E191"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZYYV41E191');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="left">
+            <a href="#menu"><span>Menu</span></a>
+        </nav>
+        <a class="logo" href="index.html">The Diet Selector</a>
+
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="selector.html">Diet Selector</a></li>
+            <li><a href="diet.html">Start Diet</a></li>
+        </ul>
+        <ul id="menuUser" class="actions vertical">
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <section id="main" class="wrapper">
+        <div class="inner">
+            <header class="align-center">
+                <h1>Start your weight loss journey today!</h1>
+            </header>
+        </div>
+
+        <hr>
+
+        <!-- User inputs -->
+        <div class="align-center">
+            <form id="dietSubmit">
+
+                <!-- Which diet? -->
+                <b>Which diet are you starting?</b>
+                <br>
+                <div id="dietSelection" class="select-wrapper" style="width: 300px; margin: 0 auto;">
+                    <select name="dietActive" id="diet_ass"></select>
+                </div>
+
+                <br>
+                <!-- Name -->
+                <b>What is your name?</b>
+                <br>
+                <div style="width: 300px; margin: 0 auto;">
+                    <input type="text" id="name_ass" placeholder="Enter name" required>
+                </div>
+
+                <br>
+                <!-- Email -->
+                <b>What is your email?</b>
+                <br>
+                <div style="width: 300px; margin: 0 auto;">
+                    <input type="email" id="email_ass" placeholder="Enter email" required>
+                </div>
+
+                <br>
+                <input id="userAddButton" type="submit" class="button" value="Get Started"></input>
+                <!-- <button class="button" id="dietSubmit">Get Started</button> -->
+
+            </form>
+
+            <div id="dietComplete" style="display: none;"></div>
+
+            <!-- AddToAny BEGIN -->
+            <!-- <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+    <a class="a2a_button_email"></a>
+    <a class="a2a_button_sms"></a>
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    </div>
+    <script>
+    var a2a_config = a2a_config || {};
+    </script>
+    <script async src="https://static.addtoany.com/menu/page.js"></script> -->
+            <!-- AddToAny END -->
+
+            <br><br>
+
+            <a class="button alt small" id="goBack" href="selector.html">Go back to the selector</a>
+            <br><br>
+
+
+            <br><br><br><br><br><br>
+
+            <div class="12u$">
+                <h3>Unhappy with our diet selector tool?</h3>
+                <h3 style="color: orange;">Tell us how we can improve!</h3>
+                <h4>Email us at: thedietselector@gmail.com</h4>
+            </div>
+
+        </div>
+
+        <br>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <h2>Get In Touch</h2>
+            <ul class="actions">
+                <li><a href="mailto: thedietselector@gmail.com">Email</a></li>
+                <li><span class="icon fa-twitter"></span> <a href="https://twitter.com/hedgefnddropout"
+                        target="_blank">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Base Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <!-- <script src="assets/js/jquery.validate.min.js"></script> -->
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Load AWS required packages -->
+    <!-- <script src="assets/js/vendor/aws-cognito-sdk.min.js"></script> -->
+    <!-- <script src="assets/js/vendor/amazon-cognito-identity.min.js"></script> -->
+    <script src="assets/js/config.js"></script>
+    <!-- <script src="assets/js/cognito-auth.js"></script> -->
+
+    <!-- Custom Scripts -->
+    <script src="assets/js/diet.js"></script>
+
+
+</body>
+
+</html>
