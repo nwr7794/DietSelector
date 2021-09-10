@@ -67,6 +67,7 @@
             ' on beginning your weight loss journey! You will receive an email from us shortly!</h3><b>Diet: ' +
             response.DietName + '<br>Email: ' + response.Email + '</b>';
 
+        document.getElementById("pitch").style.display = 'none'
         document.getElementById("dietSubmit").style.display = 'none'
         document.getElementById("dietComplete").style.display = 'block'
 
@@ -78,9 +79,6 @@
         var name = $('#name_ass').val();
         var email = $('#email_ass').val();
         var userInputs = { 'dietID': dietID, 'dietName': dietName, 'name': name, 'email': email }
-        // pausing during testing so I don't fill the database with noisy data
-        // console.log("Currently pausing DB data logging for testing purposes")
-        // console.log(userInputs)
         userAdd(userInputs)
         return false;
     }
