@@ -63,7 +63,7 @@
         }
         $("#reviewCount").html('&nbsp;' + count + ' reviews')
         // Add Price
-        $("#dietPrice").html('<b>'+dietDB.responseJSON.values[dbRow][16]+'</b>')
+        $("#dietPrice").html('<b>'+dietDB.responseJSON.values[dbRow][16]+'</b>&nbsp;-&nbsp;<a target="_blank" href="' + dietDB.responseJSON.values[dbRow][2] + '">More Info</a>')
         var tags = dietDB.responseJSON.values[dbRow][17].split(',')
         for (i = 0; i < tags.length; i++) {
             $("<i class='fa fa-check' aria-hidden='true' style='color: green;'>" + tags[i] + "</i>").appendTo("#dietTags");
