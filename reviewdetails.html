@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<!--
+	Intensify by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+
+<head>
+    <title>The Diet Selector - User ranked diet for weight loss.</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The Diet Selector helps people who want to lose weight find the diet that best fits their lifestyle. 
+	Don't want to log calories or give up certain foods? Find the best diet for you.">
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYYV41E191"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ZYYV41E191');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+
+<body class="subpage">
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="left">
+            <a href="#menu"><span>Menu</span></a>
+        </nav>
+        <a class="logo" href="reviews.html">The Diet Selector</a>
+
+    </header>
+
+    <!-- Menu -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="reviews.html">Diet Reviews</a></li>
+            <li><a href="selector.html">Diet Selector</a></li>
+        </ul>
+        <ul id="menuUser" class="actions vertical">
+        </ul>
+    </nav>
+    <!-- Main -->
+    <section id="main" class="wrapper" style="max-width: 750px; margin: auto;">
+
+        <!-- User inputs -->
+
+        <div style="display: flex;">
+            <div style="flex: content; margin: 5px; max-width: min(150px, 20%);">
+                <span class="image fit"><img id="dietLogo"></span>
+            </div>
+            <div style="margin: 5px; font-size: 10pt;">
+                <b style="font-size: 16pt; color: darkorange;" id="dietName"></b><br>
+
+                <span id="star1"></span>
+                <span id="star2"></span>
+                <span id="star3"></span>
+                <span id="star4"></span>
+                <span id="star5"></span>
+                <span id="reviewCount"></span>
+                <br>
+                <div style="margin-top: 2px; margin-bottom: 2px;">
+                    <span id="dietPrice"></span><br>
+                </div>
+                <div id="dietTags" style="margin-bottom: 2px;"></div>
+                <span id="dietDescription"></span>
+            </div>
+        </div>
+
+        <hr>
+
+
+        <form id="reviewSubmit" class="align-center">
+
+            <h4 style="margin-bottom: 5px;">Rate this diet</h4>
+            <div class="rating" id="addRating">
+                <label>
+                    <input type="radio" name="rating" value="5"> 5
+                </label>
+                <label>
+                    <input type="radio" name="rating" value="4"> 4
+                </label>
+                <label>
+                    <input type="radio" name="rating" value="3"> 3
+                </label>
+                <label>
+                    <input type="radio" name="rating" value="2"> 2
+                </label>
+                <label>
+                    <input type="radio" name="rating" value="1"> 1
+                </label>
+            </div>
+
+            <div id="showDetails" style="display: none;">
+
+                <textarea name="userReview" id="userReview"
+                    placeholder="Additional feedback? For example: I used the Weight Watchers system for 8 months and lost 20lbs! I found their app easy to use, and didn't have to chnage my lifestyle too much."
+                    rows="6" style="width: 95%; margin: auto;"></textarea>
+                <br>
+
+                <!-- Name -->
+                <div style="width: 300px; margin: 0 auto;">
+                    <input type="text" id="name_ass" placeholder="Name (shown with your review)" required>
+                </div>
+                <!-- Email -->
+                <div style="width: 300px; margin: 0 auto;">
+                    <input type="email" id="email_ass" placeholder="Email (required)" required>
+                </div>
+
+            </div>
+
+            <br>
+            <div style="margin: 0 auto; width: max-content;">
+                <input id="submitButton" type="submit" class="button special" value="Submit"></input>
+            </div>
+
+        </form>
+
+        <h4 class="align-center" style="color: black; display: none;" id="thanks">Thank you for your review!</h4>
+
+        <hr>
+
+        <div style="width: 95%; margin: auto;">
+            <h4>Reviews</h4>
+            <hr>
+            <ul id="reviewList" class="alt"></ul>
+        </div>
+
+
+
+        <br><br><br><br>
+
+        <div class="12u$ align-center">
+            <h3>Unhappy with our diet selector tool?</h3>
+            <h3 style="color: orange;">Tell us how we can improve!</h3>
+            <h4>Email us at: thedietselector@gmail.com</h4>
+        </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="inner">
+            <h2>Get In Touch</h2>
+            <ul class="actions">
+                <li><a href="mailto: thedietselector@gmail.com">Email</a></li>
+                <li><span class="icon fa-twitter"></span> <a href="https://twitter.com/hedgefnddropout"
+                        target="_blank">Twitter</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <!-- Base Scripts -->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <!-- Load AWS required packages -->
+    <!-- <script src="assets/js/vendor/aws-cognito-sdk.min.js"></script> -->
+    <!-- <script src="assets/js/vendor/amazon-cognito-identity.min.js"></script> -->
+    <script src="assets/js/config.js"></script>
+    <!-- <script src="assets/js/cognito-auth.js"></script> -->
+
+    <!-- Custom Scripts -->
+    <script src="assets/js/general.js"></script>
+    <script src="assets/js/reviewDetails.js"></script>
+    <!-- <script src="assets/js/userLog.js"></script> -->
+
+
+</body>
+
+</html>

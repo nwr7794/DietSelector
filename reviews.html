@@ -7,12 +7,18 @@
 <html>
 
 <head>
-    <title>The Diet Selector - Find the weight loss diet that best fits your lifestyle.</title>
+    <title>The Diet Selector - User ranked diet for weight loss.</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="The Diet Selector helps people who want to lose weight find the diet that best fits their lifestyle. 
-	Don't want to log calories or give up certain foods? We will find the best diet for you.">
+	Don't want to log calories or give up certain foods? Find the best diet for you.">
     <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <style>
+        .checked {
+            color: orange;
+        }
+    </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZYYV41E191"></script>
@@ -46,18 +52,31 @@
         <ul id="menuUser" class="actions vertical">
         </ul>
     </nav>
-
-    <!-- Banner -->
-    <!-- <section id="main" class="wrapper"> -->
-    <section id="banner">
-        <div class="content">
-            <h1>Start losing weight today</h1>
-            <p><b>Weight Watchers vs Keto vs Calorie Counting?<br>Find the best weight loss diet based on popular review!</b></p>
-            <ul class="actions">
-                <!-- <li><a href="selector.html" class="button scrolly">Go to the diet selector</a></li> -->
-                <li><a href="reviews.html" class="button scrolly">See The Reviews</a></li>
-            </ul>
+    <!-- Main -->
+    <section id="main" class="wrapper" style="max-width: 750px; margin: auto;">
+        <div class="inner">
+            <header class="align-center">
+                <h2>Best Diets For Weight Loss</h2>
+            </header>
         </div>
+
+        <hr style="margin: 8px;">
+
+        <!-- User inputs -->
+        <div class="align-left">
+            <ul class="alt" id="reviewList"></ul>
+        </div>
+
+        <br><br><br><br><br><br>
+
+        <div class="12u$ align-center">
+            <h3>Unhappy with our diet selector tool?</h3>
+            <h3 style="color: orange;">Tell us how we can improve!</h3>
+            <h4>Email us at: thedietselector@gmail.com</h4>
+        </div>
+
+        </div>
+
     </section>
 
     <!-- Footer -->
@@ -82,11 +101,13 @@
     <!-- Load AWS required packages -->
     <!-- <script src="assets/js/vendor/aws-cognito-sdk.min.js"></script> -->
     <!-- <script src="assets/js/vendor/amazon-cognito-identity.min.js"></script> -->
-    <!-- <script src="assets/js/config.js"></script> -->
+    <script src="assets/js/config.js"></script>
     <!-- <script src="assets/js/cognito-auth.js"></script> -->
 
     <!-- Custom Scripts -->
     <script src="assets/js/general.js"></script>
+    <script src="assets/js/reviews.js"></script>
+    <!-- <script src="assets/js/userLog.js"></script> -->
 
 
 </body>
