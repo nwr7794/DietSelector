@@ -91,7 +91,7 @@
                 var e = ''
             }
             var f = dietDB.responseJSON.values[dbRow][14] + '<br>'
-            var g = '<a class="button special small" href="reviewdetails.html?diet=' + dietAgg[aa][0] + '" style="margin-top: 2px;">&nbsp;See Reviews / Rank This Diet&nbsp;</a><br></div></div></li>'
+            var g = '<a class="button special small" href="reviewdetails.html?diet=' + dietAgg[aa][0] + '" style="margin-top: 2px;">&nbsp;Reviews&nbsp;</a><br></div></div></li>'
             var newReview = a + b + c + d + e + f + g
             $("#reviewList").append(newReview);
         }
