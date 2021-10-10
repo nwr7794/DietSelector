@@ -106,7 +106,7 @@
             for (j = 2; j < 6; j++) {
                 if (dataSlice[i][j] == 'No') {
                     count = count + 1
-                    mealBreakdown[i].push(0)
+                    mealBreakdown[i].push(0.1)
                 } else if (dataSlice[i][j] == 'Low') {
                     sum = sum + 1
                     count = count + 1
@@ -120,7 +120,7 @@
                     count = count + 1
                     mealBreakdown[i].push(3)
                 } else {
-                    mealBreakdown[i].push(0)
+                    mealBreakdown[i].push(0.1)
                 }
             }
             wtdAve[i].push(sum / count)
@@ -168,35 +168,31 @@
                 {
                     label: 'Breakfast',
                     data: mealBreakdown.map(x => x[0]),
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192,0.5)',
+                    backgroundColor: 'rgb(75, 192, 192)',
                     tension: 0.1
                 }
                 , {
                     label: 'Lunch',
                     data: mealBreakdown.map(x => x[1]),
-                    fill: false,
-                    borderColor: 'rgb(255,0,0,0.5)',
+                    backgroundColor: 'rgb(255,0,0)',
                     tension: 0.1
                 }
                 , {
                     label: 'Dinner',
                     data: mealBreakdown.map(x => x[2]),
-                    fill: false,
-                    borderColor: 'rgb(255,255,0,0.5)',
+                    backgroundColor: 'rgb(255,255,0)',
                     tension: 0.1
                 }
                 , {
                     label: 'Snacks',
                     data: mealBreakdown.map(x => x[3]),
-                    fill: false,
-                    borderColor: 'rgb(0,0,255,0.5)',
+                    backgroundColor: 'rgb(0,0,255)',
                     tension: 0.1
                 }
             ]
         };
         new Chart(ctx4, {
-            type: 'line',
+            type: 'bar',
             data: data4,
             options: {
                 // plugins: {
