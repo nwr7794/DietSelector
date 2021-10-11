@@ -32,7 +32,6 @@
             }
         }
         // dataSlice is raw
-        // console.log(dataSlice)
 
         // 'Date', 'Weight', 'Bfast', 'Lunch', 'Dinner', 'Snacks', 'Exercise'
         // Weight Graph
@@ -98,29 +97,35 @@
         // Wtd Ave Carbs Graph
         // Calc wtd ave: none - 0, low - 1, mid - 2, high - 3
         var wtdAve = dataSlice.map(x => [x[0]])
-        var mealBreakdown = [];
+        var mealBreakdown = []; // Tracking carbs my meal type
+        var dayBreakdown = [[], [], [], [], [], [], []]; // Tracking carbs by day of week
         for (i = 0; i < dataSlice.length; i++) {
             mealBreakdown.push([])
             var sum = 0
             var count = 0
+            var day = new Date(dataSlice[i][0]).getDay()
             for (j = 2; j < 6; j++) {
                 if (dataSlice[i][j] == 'No') {
                     count = count + 1
-                    mealBreakdown[i].push(0.1)
+                    mealBreakdown[i].push(0.01)
+                    dayBreakdown[day].push(0.01)
                 } else if (dataSlice[i][j] == 'Low') {
                     sum = sum + 1
                     count = count + 1
                     mealBreakdown[i].push(1)
+                    dayBreakdown[day].push(1)
                 } else if (dataSlice[i][j] == 'Mid') {
                     sum = sum + 2
                     count = count + 1
                     mealBreakdown[i].push(2)
+                    dayBreakdown[day].push(2)
                 } else if (dataSlice[i][j] == 'High') {
                     sum = sum + 3
                     count = count + 1
                     mealBreakdown[i].push(3)
+                    dayBreakdown[day].push(3)
                 } else {
-                    mealBreakdown[i].push(0.1)
+                    mealBreakdown[i].push(0.01)
                 }
             }
             wtdAve[i].push(sum / count)
@@ -159,55 +164,52 @@
             }
         });
 
-        // Meal Breakdown Graph
-        var ctx4 = document.getElementById("mealChart").getContext("2d");
-        const labels4 = dataSlice.map(x => x[0]);
-        const data4 = {
-            labels: labels4,
+        // Carbs by meal
+        function average(array){
+            if (array.length > 0){
+                return array.reduce((a, b) => a + b) / array.length;
+            } else {
+                return 0
+            }
+
+        }
+        // const average = (array) => array.reduce((a, b) => a + b) / array.length;
+
+
+
+
+        var array1 = mealBreakdown.map(x => x[0])
+        var average1 = average(array1)
+        var array2 = mealBreakdown.map(x => x[1])
+        var average2 = average(array2)
+        var array3 = mealBreakdown.map(x => x[2])
+        var average3 = average(array3)
+        var array4 = mealBreakdown.map(x => x[3])
+        var average4 = average(array4)
+
+        var ctx5 = document.getElementById("mealBChart").getContext("2d");
+        const labels5 = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+        const data5 = {
+            labels: labels5,
             datasets: [
                 {
-                    label: 'Breakfast',
-                    data: mealBreakdown.map(x => x[0]),
+                    label: 'Average Carbs',
+                    data: [average1, average2, average3, average4],
                     backgroundColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }
-                , {
-                    label: 'Lunch',
-                    data: mealBreakdown.map(x => x[1]),
-                    backgroundColor: 'rgb(255,0,0)',
-                    tension: 0.1
-                }
-                , {
-                    label: 'Dinner',
-                    data: mealBreakdown.map(x => x[2]),
-                    backgroundColor: 'rgb(255,255,0)',
-                    tension: 0.1
-                }
-                , {
-                    label: 'Snacks',
-                    data: mealBreakdown.map(x => x[3]),
-                    backgroundColor: 'rgb(0,0,255)',
                     tension: 0.1
                 }
             ]
         };
-        new Chart(ctx4, {
+        new Chart(ctx5, {
             type: 'bar',
-            data: data4,
+            data: data5,
             options: {
-                // plugins: {
-                //     title: {
-                //         display: true,
-                //         text: 'Daily Carb Intake'
-                //     }
-                // },
                 scales: {
                     yAxes: [{
                         ticks: {
                             min: 0,
                             max: 3,
                             stepSize: 1,
-                            // Include a dollar sign in the ticks
                             callback: function (value, index, values) {
                                 var tmp = ['None', 'Low', 'Mid', 'High']
                                 return tmp[value];
@@ -219,12 +221,47 @@
         });
 
 
+        // Carbs by day of week
+        var average1 = average(dayBreakdown[0])
+        var average2 = average(dayBreakdown[1])
+        var average3 = average(dayBreakdown[2])
+        var average4 = average(dayBreakdown[3])
+        var average5 = average(dayBreakdown[4])
+        var average6 = average(dayBreakdown[5])
+        var average7 = average(dayBreakdown[6])
 
-        // 2. Meal Graph (number of non-carb meals/day)
-        // 3. Meal type breakdown
-        ///////////// 4. Exercise chart
-        // 5. Wtd Ave carbs/day vs. weight
-
+        var ctx6 = document.getElementById("dayChart").getContext("2d");
+        const labels6 = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const data6 = {
+            labels: labels6,
+            datasets: [
+                {
+                    label: 'Average Carbs',
+                    data: [average1, average2, average3, average4, average5, average6, average7],
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }
+            ]
+        };
+        new Chart(ctx6, {
+            type: 'bar',
+            data: data6,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            min: 0,
+                            max: 3,
+                            stepSize: 1,
+                            callback: function (value, index, values) {
+                                var tmp = ['None', 'Low', 'Mid', 'High']
+                                return tmp[value];
+                            }
+                        }
+                    }]
+                },
+            }
+        });
 
     }
 
