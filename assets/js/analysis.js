@@ -4,44 +4,43 @@
 
     $(function onDocReady() {
 
-        // Grab dietDB - grab aws data upon completion
-        var keyProd = 'AIzaSyDaqR3scLgh4Dw26glrQ2BfDHiMJKzDIz4'
-        var keyTest = 'AIzaSyAGYgfzU5Lo2-OsFVMySI7UNzjxl_4EkQQ' ///////////////////////////////////////// Make sure right one active pre-commit
+        // Grab user ID
+        publicID = window.location.search.slice(1, 100)
+        // Grab user data
+        pullOne(publicID)
+        // Populate input form with current data
 
-        bodyDB = $.ajax({
-            method: 'GET',
-            async: true, //Switch back to false if also pulling AWS data we need
-            url: 'https://sheets.googleapis.com/v4/spreadsheets/140rsKlUgCMD8cOksdwXJfU6XJwSAFc4H2dpahk-JudU/values/SR!A1:G180?majorDimension=ROWS&key=' + keyProd,
-            success: charts,
-            error: function ajaxError(jqXHR, textStatus, errorThrown) {
-                console.error('Error pulling data: ', textStatus, ', Details: ', errorThrown);
-                console.error('Response: ', jqXHR.responseText);
+        // Show Input form button
+        $('#showInput').click(function () {
+            // if($('#userInput'))
+            $('#userInput').toggle();
+            // console.log($('#userInput').css('display'))
+            if ($('#userInput').css('display') == 'block') {
+                $('#showInput').val('Hide')
+            } else {
+                $('#showInput').val('Update Health Data')
             }
         });
+
+        // On date change, repopulate
+        $('#date_ass').change(populateForm);
+
+        // Input data and refresh page on submit
+        $('#userInput').submit(handleAddData);
 
     });
 
     function charts() {
-        console.log('data pulled')
-
-        // Ignore rows without data
-        for (i = 1; i < bodyDB.responseJSON.values.length; i++) {
-            if (bodyDB.responseJSON.values[i].length == 0) {
-                var dataSlice = bodyDB.responseJSON.values.slice(1, i);
-                break;
-            }
-        }
-        // dataSlice is raw
 
         // 'Date', 'Weight', 'Bfast', 'Lunch', 'Dinner', 'Snacks', 'Exercise'
         // Weight Graph
         var ctx1 = document.getElementById("weightChart").getContext("2d");
-        const labels1 = dataSlice.map(x => x[0]);
+        const labels1 = allData.map(x => x.InputDate);
         const data1 = {
             labels: labels1,
             datasets: [{
                 label: 'Weight',
-                data: dataSlice.map(x => x[1]),
+                data: allData.map(x => x.Weight),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
@@ -53,21 +52,21 @@
         });
 
         // Exercise Graph
-        for (i = 0; i < dataSlice.length; i++) {
-            if (dataSlice[i][6] == 'Yes') {
-                dataSlice[i][6] = 1
+        for (i = 0; i < allData.length; i++) {
+            if (allData[i].Exercise == 'Yes') {
+                allData[i].ExerciseN = 1;
             } else {
-                dataSlice[i][6] = 0
+                allData[i].ExerciseN = 0;
             }
         }
 
         var ctx2 = document.getElementById("exerciseChart").getContext("2d");
-        const labels2 = dataSlice.map(x => x[0]);
+        const labels2 = allData.map(x => x.InputDate);
         const data2 = {
             labels: labels2,
             datasets: [{
                 label: 'Exercise',
-                data: dataSlice.map(x => x[6]),
+                data: allData.map(x => x.ExerciseN),
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
@@ -83,7 +82,6 @@
                             min: -0.5,
                             max: 1.5,
                             stepSize: 1,
-                            // Include a dollar sign in the ticks
                             callback: function (value, index, values) {
                                 var tmp = ['No', 'Yes']
                                 return tmp[value];
@@ -96,30 +94,32 @@
 
         // Wtd Ave Carbs Graph
         // Calc wtd ave: none - 0, low - 1, mid - 2, high - 3
-        var wtdAve = dataSlice.map(x => [x[0]])
+        var wtdAve = allData.map(x => [x.InputDate])
         var mealBreakdown = []; // Tracking carbs my meal type
         var dayBreakdown = [[], [], [], [], [], [], []]; // Tracking carbs by day of week
-        for (i = 0; i < dataSlice.length; i++) {
+        for (i = 0; i < allData.length; i++) {
             mealBreakdown.push([])
             var sum = 0
             var count = 0
-            var day = new Date(dataSlice[i][0]).getDay()
-            for (j = 2; j < 6; j++) {
-                if (dataSlice[i][j] == 'No') {
+            var day = new Date(allData[i].InputDate).getDay()
+            var objects = ['Breakfast', 'Lunch', 'Dinner', 'Snacks']
+            for (j = 0; j < objects.length; j++) {
+                var mealtmp = eval('allData[' + i + '].' + objects[j])
+                if (mealtmp == 'No') {
                     count = count + 1
                     mealBreakdown[i].push(0.01)
                     dayBreakdown[day].push(0.01)
-                } else if (dataSlice[i][j] == 'Low') {
+                } else if (mealtmp == 'Low') {
                     sum = sum + 1
                     count = count + 1
                     mealBreakdown[i].push(1)
                     dayBreakdown[day].push(1)
-                } else if (dataSlice[i][j] == 'Mid') {
+                } else if (mealtmp == 'Mid') {
                     sum = sum + 2
                     count = count + 1
                     mealBreakdown[i].push(2)
                     dayBreakdown[day].push(2)
-                } else if (dataSlice[i][j] == 'High') {
+                } else if (mealtmp == 'High') {
                     sum = sum + 3
                     count = count + 1
                     mealBreakdown[i].push(3)
@@ -153,7 +153,6 @@
                             min: 0,
                             max: 3,
                             stepSize: 1,
-                            // Include a dollar sign in the ticks
                             callback: function (value, index, values) {
                                 var tmp = ['None', 'Low', 'Mid', 'High']
                                 return tmp[value];
@@ -165,18 +164,14 @@
         });
 
         // Carbs by meal
-        function average(array){
-            if (array.length > 0){
+        function average(array) {
+            if (array.length > 0) {
                 return array.reduce((a, b) => a + b) / array.length;
             } else {
                 return 0
             }
 
         }
-        // const average = (array) => array.reduce((a, b) => a + b) / array.length;
-
-
-
 
         var array1 = mealBreakdown.map(x => x[0])
         var average1 = average(array1)
@@ -262,6 +257,142 @@
                 },
             }
         });
+
+
+    }
+
+    // Functions to grab AWS data
+    function pullOne(ID) {
+        $.ajax({
+            method: 'POST',
+            url: 'https://beshfpo816.execute-api.us-east-2.amazonaws.com/prod/user',
+            headers: {},
+            data: JSON.stringify({
+                Actions: 'pullOne',
+                ID: ID
+            }),
+            contentType: 'application/json',
+            success: completePull,
+            error: function ajaxError(jqXHR, textStatus, errorThrown) {
+                console.error('Error user add: ', textStatus, ', Details: ', errorThrown);
+                console.error('Response: ', jqXHR.responseText);
+            }
+        });
+    }
+
+    function completePull(response) {
+        console.log('data pulled')
+        // allData = response
+        // Sort allData by date oldest -> newest
+        allData = response.sort(function (a, b) {
+            return new Date(a.InputDate) - new Date(b.InputDate);
+        });
+        charts();
+        // Set Input Date values
+        var today = new Date()
+        var yest = new Date(today)
+        yest.setDate(yest.getDate() - 1)
+        var dateFormatted1 = today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear().toString().slice(2, 4);
+        var dateFormatted2 = yest.getMonth() + 1 + '/' + yest.getDate() + '/' + yest.getFullYear().toString().slice(2, 4);
+        $('#date_ass option').eq(0).val(dateFormatted1);
+        $('#date_ass option').eq(1).val(dateFormatted2);
+        populateForm();
+    }
+
+    function handleAddData() {
+        var ID = publicID;
+        var breakfast = $('#breakfast_ass').val();
+        var lunch = $('#lunch_ass').val();
+        var dinner = $('#dinner_ass').val();
+        var snacks = $('#snacks_ass').val();
+        var weight = $('#weight_ass').val();
+        var exercise = $('#exercise_ass').val();
+        var userInputs = { 'ID': ID, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner, 'snacks': snacks, 'weight': weight, 'exercise': exercise }
+        console.log(userInputs)
+        addEntry(userInputs);
+        return false;
+    }
+
+    function addEntry(userInputs) {
+        $.ajax({
+            method: 'POST',
+            url: 'https://beshfpo816.execute-api.us-east-2.amazonaws.com/prod/user',
+            headers: {},
+            data: JSON.stringify({
+                Actions: 'add',
+                ID: userInputs.ID,
+                Breakfast: userInputs.breakfast,
+                Lunch: userInputs.lunch,
+                Dinner: userInputs.dinner,
+                Snacks: userInputs.snacks,
+                Weight: userInputs.weight,
+                Exercise: userInputs.exercise
+            }),
+            contentType: 'application/json',
+            success: completeAdd,
+            error: function ajaxError(jqXHR, textStatus, errorThrown) {
+                console.error('Error user add: ', textStatus, ', Details: ', errorThrown);
+                console.error('Response: ', jqXHR.responseText);
+            }
+        });
+    }
+
+    function completeAdd(response) {
+
+        console.log(response)
+        if (confirm('Data added, page will now refresh')) {
+            window.location.reload(true);
+        }
+
+        // alert('Data added, page will now refresh')
+        // location.reload;
+    }
+
+    function populateForm() {
+        const relData = (x) => x.InputDate == $('#date_ass').find(":selected").val();
+        var index = allData.findIndex(relData)
+        // If some data exists then populate
+        if (index != -1) {
+            // Left off here - set input values for whatever currently exists
+            if (allData[index].Breakfast != undefined & allData[index].Breakfast != '') {
+                $("#breakfast_ass").val(allData[index].Breakfast)
+            } else {
+                $("#breakfast_ass").val('Skip')
+            }
+            if (allData[index].Lunch != undefined & allData[index].Lunch != '') {
+                $("#lunch_ass").val(allData[index].Lunch)
+            } else {
+                $("#lunch_ass").val('Skip')
+            }
+            if (allData[index].Dinner != undefined & allData[index].Dinner != '') {
+                $("#dinner_ass").val(allData[index].Dinner)
+            } else {
+                $("#dinner_ass").val('Skip')
+            }
+            if (allData[index].Snacks != undefined & allData[index].Snacks != '') {
+                $("#snacks_ass").val(allData[index].Snacks)
+            } else {
+                $("#snacks_ass").val('Skip')
+            }
+            if (allData[index].Exercise != undefined & allData[index].Exercise != '') {
+                $("#exercise_ass").val(allData[index].Exercise)
+            } else {
+                $("#exercise_ass").val('No')
+            }
+            if (allData[index].Weight != undefined) {
+                $("#weight_ass").val(allData[index].Weight)
+            } else {
+                $("#weight_ass").val('')
+            }
+        } else {
+            // Set Defaults
+            $("#breakfast_ass").val('Skip')
+            $("#lunch_ass").val('Skip')
+            $("#dinner_ass").val('Skip')
+            $("#snacks_ass").val('Skip')
+            $("#exercise_ass").val('No')
+            $("#weight_ass").val('')
+        }
 
     }
 

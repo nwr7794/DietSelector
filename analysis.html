@@ -50,17 +50,110 @@
     <section id="main" class="wrapper">
         <div class="inner">
             <header class="align-center">
-                <h1>Body Change Analysis</h1>
+                <h1>Body Change Dashboard</h1>
             </header>
             <hr>
 
+
+            <!-- Add Input controls here. Should be noted that we have already pulled user health data to populate today/yesterday input -->
+            <!-- Landing Page Pitch - Lose body fat: No hunger required. Eat fewer carbs, track your progess in only 30 seconds per day -->
+
+
+            <div style="margin: 0 auto; width: max-content;">
+                <input id="showInput" type="button" class="button special" value="Update Health Data"
+                    style="min-width: 150px;"></input>
+            </div>
+
+            <form style="display: none;" id="userInput" class="align-center">
+                <br>
+                <p>*Update your health data for today and yesterday here. Submitting the form will overwrite any
+                    previous data with your current selections. If you would like to update older data, then contact me
+                    directly.</p>
+
+
+                <u>Date</u>
+                <!-- JS Code will add dates to values -->
+                <div class="select-wrapper" style="width: 150px; margin: 0 auto;">
+                    <select name="date" id="date_ass">
+                        <option value="test1" selected>Today</option>
+                        <option value="test2">Yesterday</option>
+                    </select>
+                </div>
+                <u>Breakfast</u>
+                <div class="select-wrapper" style="width: 150px; margin: 0 auto;">
+                    <select name="breakfast" id="breakfast_ass">
+                        <option value="No">No Carb</option>
+                        <option value="Low">Low Carb</option>
+                        <option value="Mid">Mid Carb</option>
+                        <option value="High">High Carb</option>
+                        <option value="Skip" selected>Skip</option>
+                    </select>
+                </div>
+                <u>Lunch</u>
+                <div class="select-wrapper" style="width: 150px; margin: 0 auto;">
+                    <select name="lunch" id="lunch_ass">
+                        <option value="No">No Carb</option>
+                        <option value="Low">Low Carb</option>
+                        <option value="Mid">Mid Carb</option>
+                        <option value="High">High Carb</option>
+                        <option value="Skip" selected>Skip</option>
+                    </select>
+                </div>
+                <u>Dinner</u>
+                <div class="select-wrapper" style="width: 150px; margin: 0 auto;">
+                    <select name="dinner" id="dinner_ass">
+                        <option value="No">No Carb</option>
+                        <option value="Low">Low Carb</option>
+                        <option value="Mid">Mid Carb</option>
+                        <option value="High">High Carb</option>
+                        <option value="Skip" selected>Skip</option>
+                    </select>
+                </div>
+                <u>Snacks</u>
+                <div class="select-wrapper" style="width: 150px; margin: 0 auto;">
+                    <select name="snacks" id="snacks_ass">
+                        <option value="No">No Carb</option>
+                        <option value="Low">Low Carb</option>
+                        <option value="Mid">Mid Carb</option>
+                        <option value="High">High Carb</option>
+                        <option value="Skip" selected>Skip</option>
+                    </select>
+                </div>
+                <u>Exercise</u>
+                <div class="select-wrapper" style="width: 150px; margin: 0 auto;">
+                    <select name="exercise" id="exercise_ass">
+                        <option value="No" selected>No</option>
+                        <option value="Yes">Yes</option>
+                    </select>
+                </div>
+                <!-- Weight -->
+                <u>Weight</u>
+                <div style="width: 150px; margin: 0 auto;">
+                    <input style="width: inherit;" type="number" id="weight_ass" step="any" min="0"
+                        placeholder="Optional">
+                </div>
+
+                <br>
+                <div style="margin: 0 auto; width: max-content;">
+                    <input id="submitButton" type="submit" class="button special" value="Submit"
+                        style="min-width: 150px;"></input>
+                </div>
+
+            </form>
+
+            <br>
+
+
             <!-- Weight Loss Chart -->
+            <b>Body Weight</b>
             <canvas id="weightChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
             <br>
             <!-- Wtd Ave Carbs Chart -->
+            <b>Daily Carb Intake</b>
             <canvas id="aveChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
             <br>
             <!-- Exercise chart -->
+            <b>Exercise</b>
             <canvas id="exerciseChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
             <br>
             <!-- Meal breakdown Chart -->
