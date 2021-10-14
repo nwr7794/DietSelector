@@ -301,14 +301,15 @@
 
     function handleAddData() {
         var ID = publicID;
+        var inputDate = $('#date_ass').val();
         var breakfast = $('#breakfast_ass').val();
         var lunch = $('#lunch_ass').val();
         var dinner = $('#dinner_ass').val();
         var snacks = $('#snacks_ass').val();
         var weight = $('#weight_ass').val();
         var exercise = $('#exercise_ass').val();
-        var userInputs = { 'ID': ID, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner, 'snacks': snacks, 'weight': weight, 'exercise': exercise }
-        console.log(userInputs)
+        var userInputs = { 'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner, 'snacks': snacks, 'weight': weight, 'exercise': exercise }
+        // console.log(userInputs)
         addEntry(userInputs);
         return false;
     }
@@ -321,6 +322,7 @@
             data: JSON.stringify({
                 Actions: 'add',
                 ID: userInputs.ID,
+                InputDate: userInputs.inputDate,
                 Breakfast: userInputs.breakfast,
                 Lunch: userInputs.lunch,
                 Dinner: userInputs.dinner,
@@ -389,7 +391,6 @@
             $("#exercise_ass").val('No')
             $("#weight_ass").val('')
         }
-
     }
 
 
@@ -397,3 +398,4 @@
 
 
 
+ 
