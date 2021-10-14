@@ -340,12 +340,8 @@
     function completeAdd(response) {
 
         console.log(response)
-        if (confirm('Data added, page will now refresh')) {
-            window.location.reload(true);
-        }
-
-        // alert('Data added, page will now refresh')
-        // location.reload;
+        if(!alert('Data added, page will now refresh!')){window.location.reload();}
+        
     }
 
     function populateForm() {
