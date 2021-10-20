@@ -67,16 +67,18 @@
             <form style="display: none;" id="userInput" class="align-center">
                 <br>
                 <div class="align-left">
-                <p>*Update your health data for today and yesterday here. Submitting the form will overwrite any
-                    previous data with your current selections. If you would like to update older data, then contact me
-                    directly.</p>
-                <p><b>Definitions</b><br>
-                    <u>No Carb</u>: No...sugar, processed food, grains (bread, rice, etc), starchy veggies (corn, potatoes, etc), fruit, beer, soda...<br>
-                    <u>Low Carb</u>: No carb + small portion of fruit<br>
-                    <u>Mid Carb</u>: No carb + small portion of grains<br>
-                    <u>High Carb</u>: Everything Else
-                </p>
-            </div>
+                    <p>*Update your health data for today and yesterday here. Submitting the form will overwrite any
+                        previous data with your current selections. If you would like to update older data, then contact
+                        me
+                        directly.</p>
+                    <p><b>Definitions</b><br>
+                        <u>No Carb</u>: No...sugar, processed food, grains (bread, rice, etc), starchy veggies (corn,
+                        potatoes, etc), fruit, beer, soda...<br>
+                        <u>Low Carb</u>: No carb + small portion of fruit<br>
+                        <u>Mid Carb</u>: No carb + small portion of grains<br>
+                        <u>High Carb</u>: Everything Else
+                    </p>
+                </div>
 
 
                 <u>Date</u>
@@ -140,6 +142,23 @@
                     <input style="width: inherit;" type="number" id="weight_ass" step="any" min="0"
                         placeholder="Optional">
                 </div>
+                <!-- Alcohol -->
+                <u>Alcoholic Drinks</u>
+                <div style="width: 150px; margin: 0 auto;">
+                    <input style="width: inherit;" type="number" id="alcohol_ass" step="any" min="0"
+                        placeholder="Optional">
+                </div>
+                <!-- Sleep -->
+                <u>Sleep (Hours)</u>
+                <div style="width: 150px; margin: 0 auto;">
+                    <input style="width: inherit;" type="number" id="sleep_ass" step="any" min="0"
+                        placeholder="Optional (Ex: 8.5)">
+                </div>
+                <!-- Meditation -->
+                <u>Meditation (Minutes)</u>
+                <div style="width: 150px; margin: 0 auto;">
+                    <input style="width: inherit;" type="number" id="meditation_ass" step="any" min="0" value="0">
+                </div>
 
                 <br>
                 <div style="margin: 0 auto; width: max-content;">
@@ -159,18 +178,37 @@
             <!-- Wtd Ave Carbs Chart -->
             <b>Daily Carb Intake</b>
             <canvas id="aveChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+            <div id="carbDetails" style="display: none;">
+                <br>
+                <!-- Meal breakdown Chart -->
+                <b>Daily Carb Intake By Meal</b>
+                <canvas id="mealBChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+                <br>
+                <!-- Day breakdown Chart -->
+                <b>Daily Carb Intake By Day</b>
+                <canvas id="dayChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+            </div>
+            <div style="margin: 0 auto; width: max-content;">
+                <input id="showCarbDetails" type="button" class="button" value="Show Carb Details"
+                    style="min-width: 150px;"></input>
+            </div>
             <br>
             <!-- Exercise chart -->
             <b>Exercise</b>
             <canvas id="exerciseChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
             <br>
-            <!-- Meal breakdown Chart -->
-            <b>Daily Carb Intake By Meal</b>
-            <canvas id="mealBChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+            <b>Alcoholic Drinks</b>
+            <canvas id="alcoholChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
             <br>
-            <!-- Day breakdown Chart -->
-            <b>Daily Carb Intake By Day</b>
-            <canvas id="dayChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+            <b>Sleep</b>
+            <canvas id="sleepChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+
+            <br>
+            <b>Meditation</b>
+            <canvas id="meditationChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
+            <br>
+
+
             <!-- Meal breakdown Chart -->
             <!-- <b>Daily Carb Intake By Meal</b>
             <canvas id="mealChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas> -->

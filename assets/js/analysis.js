@@ -22,6 +22,19 @@
             }
         });
 
+        // Show Carb Details button
+        $('#showCarbDetails').click(function () {
+            // if($('#userInput'))
+            $('#carbDetails').toggle();
+            // console.log($('#userInput').css('display'))
+            if ($('#carbDetails').css('display') == 'block') {
+                $('#showCarbDetails').val('Hide')
+            } else {
+                $('#showCarbDetails').val('Show Carb Details')
+            }
+        });
+        
+
         // On date change, repopulate
         $('#date_ass').change(populateForm);
 
@@ -258,6 +271,61 @@
             }
         });
 
+        // Alcohol Graph
+        var ctx7 = document.getElementById("alcoholChart").getContext("2d");
+        const labels7 = allData.map(x => x.InputDate);
+        const data7 = {
+            labels: labels7,
+            datasets: [{
+                label: 'Drinks',
+                data: allData.map(x => x.Alcohol),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        new Chart(ctx7, {
+            type: 'line',
+            data: data7,
+        });
+
+        // Sleep Graph
+        var ctx8 = document.getElementById("sleepChart").getContext("2d");
+        const labels8 = allData.map(x => x.InputDate);
+        const data8 = {
+            labels: labels8,
+            datasets: [{
+                label: 'Sleep',
+                data: allData.map(x => x.Sleep),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        new Chart(ctx8, {
+            type: 'line',
+            data: data8,
+        });
+
+        // Meditation Graph
+        var ctx9 = document.getElementById("meditationChart").getContext("2d");
+        const labels9 = allData.map(x => x.InputDate);
+        const data9 = {
+            labels: labels9,
+            datasets: [{
+                label: 'Meditation',
+                data: allData.map(x => x.Meditation),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        new Chart(ctx9, {
+            type: 'line',
+            data: data9,
+        });
+        
+
 
     }
 
@@ -308,7 +376,12 @@
         var snacks = $('#snacks_ass').val();
         var weight = $('#weight_ass').val();
         var exercise = $('#exercise_ass').val();
-        var userInputs = { 'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner, 'snacks': snacks, 'weight': weight, 'exercise': exercise }
+        var alcohol = $('#alcohol_ass').val();
+        var sleep = $('#sleep_ass').val();
+        var meditation = $('#meditation_ass').val();
+
+        var userInputs = { 'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner
+        , 'snacks': snacks, 'weight': weight, 'exercise': exercise, 'alcohol': alcohol, 'sleep': sleep, 'meditation': meditation }
         // console.log(userInputs)
         addEntry(userInputs);
         return false;
@@ -328,7 +401,10 @@
                 Dinner: userInputs.dinner,
                 Snacks: userInputs.snacks,
                 Weight: userInputs.weight,
-                Exercise: userInputs.exercise
+                Exercise: userInputs.exercise,
+                Alcohol: userInputs.alcohol,
+                Sleep: userInputs.sleep,
+                Meditation: userInputs.meditation
             }),
             contentType: 'application/json',
             success: completeAdd,
@@ -382,6 +458,21 @@
             } else {
                 $("#weight_ass").val('')
             }
+            if (allData[index].Alcohol != undefined) {
+                $("#alcohol_ass").val(allData[index].Alcohol)
+            } else {
+                $("#alcohol_ass").val('')
+            }
+            if (allData[index].Sleep != undefined) {
+                $("#sleep_ass").val(allData[index].Sleep)
+            } else {
+                $("#sleep_ass").val('')
+            }
+            if (allData[index].Meditation != undefined) {
+                $("#meditation_ass").val(allData[index].Meditation)
+            } else {
+                $("#meditation_ass").val('0')
+            }
         } else {
             // Set Defaults
             $("#breakfast_ass").val('Skip')
@@ -390,6 +481,9 @@
             $("#snacks_ass").val('Skip')
             $("#exercise_ass").val('No')
             $("#weight_ass").val('')
+            $("#alcohol_ass").val('')
+            $("#sleep_ass").val('')
+            $("#meditation_ass").val('0')
         }
     }
 
