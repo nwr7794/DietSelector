@@ -33,7 +33,7 @@
                 $('#showCarbDetails').val('Show Carb Details')
             }
         });
-        
+
 
         // On date change, repopulate
         $('#date_ass').change(populateForm);
@@ -66,12 +66,20 @@
 
         // Exercise Graph
         for (i = 0; i < allData.length; i++) {
-            if (allData[i].Exercise == 'Yes') {
+            if (allData[i].Exercise == 'Low') {
                 allData[i].ExerciseN = 1;
+            } else if (allData[i].Exercise == 'Mid') {
+                allData[i].ExerciseN = 2;
+            } else if (allData[i].Exercise == 'High') {
+                allData[i].ExerciseN = 3;
+            } else if (allData[i].Exercise == 'Yes') {
+                allData[i].ExerciseN = 2; // Will assume legacy yes' as mid
             } else {
                 allData[i].ExerciseN = 0;
             }
         }
+
+        // /////////////////////////// Add exercise levels to input and change chart code/axis
 
         var ctx2 = document.getElementById("exerciseChart").getContext("2d");
         const labels2 = allData.map(x => x.InputDate);
@@ -92,11 +100,11 @@
                 scales: {
                     yAxes: [{
                         ticks: {
-                            min: -0.5,
-                            max: 1.5,
+                            min: 0,
+                            max: 3,
                             stepSize: 1,
                             callback: function (value, index, values) {
-                                var tmp = ['No', 'Yes']
+                                var tmp = ['None', 'Low', 'Mid', 'High']
                                 return tmp[value];
                             }
                         }
@@ -324,7 +332,7 @@
             type: 'line',
             data: data9,
         });
-        
+
 
 
     }
@@ -380,8 +388,10 @@
         var sleep = $('#sleep_ass').val();
         var meditation = $('#meditation_ass').val();
 
-        var userInputs = { 'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner
-        , 'snacks': snacks, 'weight': weight, 'exercise': exercise, 'alcohol': alcohol, 'sleep': sleep, 'meditation': meditation }
+        var userInputs = {
+            'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner
+            , 'snacks': snacks, 'weight': weight, 'exercise': exercise, 'alcohol': alcohol, 'sleep': sleep, 'meditation': meditation
+        }
         // console.log(userInputs)
         addEntry(userInputs);
         return false;
@@ -418,8 +428,8 @@
     function completeAdd(response) {
 
         console.log(response)
-        if(!alert('Data added, page will now refresh!')){window.location.reload();}
-        
+        if (!alert('Data added, page will now refresh!')) { window.location.reload(); }
+
     }
 
     function populateForm() {
@@ -492,4 +502,3 @@
 
 
 
- 
