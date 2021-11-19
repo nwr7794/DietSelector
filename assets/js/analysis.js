@@ -7,19 +7,25 @@
         // Grab user ID
         publicID = window.location.search.slice(1, 100)
         // Grab user data
-        pullOne(publicID)
+        pullOne(publicID, 'BodyChangeData')
+        // Grab user name
+        pullOne(publicID, 'BodyChangeUsers')
         // Populate input form with current data
 
         // Show Input form button
         $('#showInput').click(function () {
-            // if($('#userInput'))
-            $('#userInput').toggle();
-            // console.log($('#userInput').css('display'))
-            if ($('#userInput').css('display') == 'block') {
-                $('#showInput').val('Hide')
+            if ($('#name_check').val().toLowerCase() == editTest.toLowerCase()) {
+                $('#userInput').toggle();
+                // console.log($('#userInput').css('display'))
+                if ($('#userInput').css('display') == 'block') {
+                    $('#showInput').val('Hide')
+                } else {
+                    $('#showInput').val('Update Health Data')
+                }
             } else {
-                $('#showInput').val('Update Health Data')
+                alert('Wrong name')
             }
+
         });
 
         // Show Carb Details button
@@ -338,14 +344,15 @@
     }
 
     // Functions to grab AWS data
-    function pullOne(ID) {
+    function pullOne(ID, tableName) {
         $.ajax({
             method: 'POST',
             url: 'https://beshfpo816.execute-api.us-east-2.amazonaws.com/prod/user',
             headers: {},
             data: JSON.stringify({
                 Actions: 'pullOne',
-                ID: ID
+                ID: ID,
+                TableName: tableName
             }),
             contentType: 'application/json',
             success: completePull,
@@ -358,21 +365,25 @@
 
     function completePull(response) {
         console.log('data pulled')
-        // allData = response
-        // Sort allData by date oldest -> newest
-        allData = response.sort(function (a, b) {
-            return new Date(a.InputDate) - new Date(b.InputDate);
-        });
-        charts();
-        // Set Input Date values
-        var today = new Date()
-        var yest = new Date(today)
-        yest.setDate(yest.getDate() - 1)
-        var dateFormatted1 = today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear().toString().slice(2, 4);
-        var dateFormatted2 = yest.getMonth() + 1 + '/' + yest.getDate() + '/' + yest.getFullYear().toString().slice(2, 4);
-        $('#date_ass option').eq(0).val(dateFormatted1);
-        $('#date_ass option').eq(1).val(dateFormatted2);
-        populateForm();
+        if (response[0].Email != undefined) {
+            editTest = response[0].Email
+        } else {
+            // allData = response
+            // Sort allData by date oldest -> newest
+            allData = response.sort(function (a, b) {
+                return new Date(a.InputDate) - new Date(b.InputDate);
+            });
+            charts();
+            // Set Input Date values
+            var today = new Date()
+            var yest = new Date(today)
+            yest.setDate(yest.getDate() - 1)
+            var dateFormatted1 = today.getMonth() + 1 + '/' + today.getDate() + '/' + today.getFullYear().toString().slice(2, 4);
+            var dateFormatted2 = yest.getMonth() + 1 + '/' + yest.getDate() + '/' + yest.getFullYear().toString().slice(2, 4);
+            $('#date_ass option').eq(0).val(dateFormatted1);
+            $('#date_ass option').eq(1).val(dateFormatted2);
+            populateForm();
+        }
     }
 
     function handleAddData() {
