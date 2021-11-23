@@ -122,6 +122,7 @@
         // Wtd Ave Carbs Graph
         // Calc wtd ave: none - 0, low - 1, mid - 2, high - 3
         var wtdAve = allData.map(x => [x.InputDate])
+        var rollingAve = allData.map(x => [x.InputDate])
         var mealBreakdown = []; // Tracking carbs my meal type
         var dayBreakdown = [[], [], [], [], [], [], []]; // Tracking carbs by day of week
         for (i = 0; i < allData.length; i++) {
@@ -156,19 +157,37 @@
                 }
             }
             wtdAve[i].push(sum / count)
+            if (i > 4) {
+                rollingAve[i].push((wtdAve[i - 4][1] + wtdAve[i - 3][1] + wtdAve[i - 2][1] + wtdAve[i - 1][1] + wtdAve[i][1]) / 5)
+            } else {
+                rollingAve[i].push(wtdAve[i][1])
+            }
         }
+        // console.log(wtdAve)
+        // console.log(rollingAve)
 
         var ctx3 = document.getElementById("aveChart").getContext("2d");
         const labels3 = wtdAve.map(x => x[0]);
         const data3 = {
             labels: labels3,
-            datasets: [{
-                label: 'Daily Carb Intake',
-                data: wtdAve.map(x => x[1]),
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1
-            }]
+            datasets: [
+                {
+                    label: '5 Day Ave',
+                    data: rollingAve.map(x => x[1]),
+                    fill: false,
+                    borderColor: 'rgb(245, 147, 66)',
+                    tension: 0,
+                    radius: 0,
+                    borderWidth: 4
+                }
+                , {
+                    label: 'Daily Carb Intake',
+                    data: wtdAve.map(x => x[1]),
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }
+            ]
         };
         new Chart(ctx3, {
             type: 'line',
