@@ -63,7 +63,7 @@
         }
         $("#reviewCount").html('&nbsp;' + count + ' reviews')
         // Add Price
-        $("#dietPrice").html('<b>'+dietDB.responseJSON.values[dbRow][16]+'</b>&nbsp;-&nbsp;<a target="_blank" href="' + dietDB.responseJSON.values[dbRow][2] + '">More Info</a>')
+        $("#dietPrice").html('<b>' + dietDB.responseJSON.values[dbRow][16] + '</b>&nbsp;-&nbsp;<a target="_blank" href="' + dietDB.responseJSON.values[dbRow][2] + '">More Info</a>')
         var tags = dietDB.responseJSON.values[dbRow][17].split(',')
         for (i = 0; i < tags.length; i++) {
             $("<i class='fa fa-check' aria-hidden='true' style='color: green;'>" + tags[i] + "</i>").appendTo("#dietTags");
@@ -72,22 +72,29 @@
 
         // Add user reviews at bottom of page
         // First sort by newest review
-        var sortedArray = reviewsGlobal.sort(function (a, b) {
-            return new Date(b.InputDate) - new Date(a.InputDate);
-        });
+        if (reviewsGlobal.length > 0) {
+            var sortedArray = reviewsGlobal.sort(function (a, b) {
+                return new Date(b.InputDate) - new Date(a.InputDate);
+            });
 
-        for (jj = 0; jj < sortedArray.length; jj++) {
-            var stars = []
-            for (ii = 1; ii < 6; ii++) {
-                if (parseInt(sortedArray[jj].Rating) >= ii) {
-                    stars.push('<span class="fa fa-star checked"></span>')
-                } else {
-                    stars.push('<span class="fa fa-star"></span>')
+            for (jj = 0; jj < sortedArray.length; jj++) {
+                var stars = []
+                for (ii = 1; ii < 6; ii++) {
+                    if (parseInt(sortedArray[jj].Rating) >= ii) {
+                        stars.push('<span class="fa fa-star checked"></span>')
+                    } else {
+                        stars.push('<span class="fa fa-star"></span>')
+                    }
                 }
+                stars = stars.join('')
+                var newReview = '<li><div style="margin: 5px; font-size: 10pt;"><b style="font-size: 14pt;">' + sortedArray[jj].Username + '</b><br>' + stars + '&nbsp; - ' + sortedArray[jj].InputDate.slice(0, 10) + '<br>' + sortedArray[jj].Comment + '<br></div></li>';
+                $("#reviewList").append(newReview);
             }
-            stars = stars.join('')
-            var newReview = '<li><div style="margin: 5px; font-size: 10pt;"><b style="font-size: 14pt;">' + sortedArray[jj].Username + '</b><br>' + stars + '&nbsp; - ' + sortedArray[jj].InputDate.slice(0, 10) + '<br>' + sortedArray[jj].Comment + '<br></div></li>';
+
+        } else {
+            var newReview = '<b>No reviews - be the first to leave one!</b>';
             $("#reviewList").append(newReview);
+
         }
 
     }

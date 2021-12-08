@@ -139,9 +139,9 @@
 
             var buttonOutput = document.createElement('a')
             buttonOutput.setAttribute('class', 'button small')
-            buttonOutput.setAttribute('href', 'diet.html?diet=' + dietID)
-            buttonOutput.innerHTML = 'Start'
-
+            // buttonOutput.setAttribute('href', 'diet.html?diet=' + dietID)
+            buttonOutput.setAttribute('href', 'reviewdetails.html?diet=' + dietID)
+            buttonOutput.innerHTML = 'Reviews'
 
             // Add output diet characteristics to array
             outputDiets.push([linkOutput.outerHTML, score, dietID, adherence, buttonOutput.outerHTML, blurb
