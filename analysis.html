@@ -151,8 +151,7 @@
                 <!-- Alcohol -->
                 <u>Alcoholic Drinks</u>
                 <div style="width: 150px; margin: 0 auto;">
-                    <input style="width: inherit;" type="number" id="alcohol_ass" step="any" min="0"
-                        placeholder="Optional">
+                    <input style="width: inherit;" type="number" id="alcohol_ass" step="any" min="0" value="0">
                 </div>
                 <!-- Sleep -->
                 <u>Sleep (Hours)</u>
@@ -164,6 +163,11 @@
                 <u>Meditation (Minutes)</u>
                 <div style="width: 150px; margin: 0 auto;">
                     <input style="width: inherit;" type="number" id="meditation_ass" step="any" min="0" value="0">
+                </div>
+                <!-- Deep Work -->
+                <u>Deep Work (Minutes)</u>
+                <div style="width: 150px; margin: 0 auto;">
+                    <input style="width: inherit;" type="number" id="deepwork_ass" step="any" min="0" value="0">
                 </div>
 
                 <br>
@@ -198,6 +202,10 @@
                 <input id="showCarbDetails" type="button" class="button" value="Show Carb Details"
                     style="min-width: 150px;"></input>
             </div>
+            <br>
+            <!-- Deep Work chart -->
+            <b>Deep Work</b>
+            <canvas id="deepworkChart" style="width:100%; max-width: 750px;padding: 3px; margin: 0 auto;"></canvas>
             <br>
             <!-- Exercise chart -->
             <b>Exercise</b>

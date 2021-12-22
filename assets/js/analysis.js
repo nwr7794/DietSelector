@@ -358,6 +358,24 @@
             data: data9,
         });
 
+        // Deep Work Graph
+        var ctx10 = document.getElementById("deepworkChart").getContext("2d");
+        const labels10 = allData.map(x => x.InputDate);
+        const data10 = {
+            labels: labels10,
+            datasets: [{
+                label: 'Deep Work',
+                data: allData.map(x => x.Deepwork),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        new Chart(ctx10, {
+            type: 'line',
+            data: data10,
+        });
+
 
 
     }
@@ -417,10 +435,12 @@
         var alcohol = $('#alcohol_ass').val();
         var sleep = $('#sleep_ass').val();
         var meditation = $('#meditation_ass').val();
+        var deepwork = $('#deepwork_ass').val();
 
         var userInputs = {
             'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner
-            , 'snacks': snacks, 'weight': weight, 'exercise': exercise, 'alcohol': alcohol, 'sleep': sleep, 'meditation': meditation
+            , 'snacks': snacks, 'weight': weight, 'exercise': exercise, 'alcohol': alcohol, 'sleep': sleep, 'meditation': meditation,
+            'deepwork': deepwork
         }
         // console.log(userInputs)
         addEntry(userInputs);
@@ -444,7 +464,8 @@
                 Exercise: userInputs.exercise,
                 Alcohol: userInputs.alcohol,
                 Sleep: userInputs.sleep,
-                Meditation: userInputs.meditation
+                Meditation: userInputs.meditation,
+                Deepwork: userInputs.deepwork
             }),
             contentType: 'application/json',
             success: completeAdd,
@@ -513,6 +534,13 @@
             } else {
                 $("#meditation_ass").val('0')
             }
+            if (allData[index].Deepwork != undefined) {
+                $("#deepwork_ass").val(allData[index].Deepwork)
+            } else {
+                $("#deepwork_ass").val('0')
+            }
+
+
         } else {
             // Set Defaults
             $("#breakfast_ass").val('Skip')
@@ -521,9 +549,10 @@
             $("#snacks_ass").val('Skip')
             $("#exercise_ass").val('No')
             $("#weight_ass").val('')
-            $("#alcohol_ass").val('')
+            $("#alcohol_ass").val('0')
             $("#sleep_ass").val('')
             $("#meditation_ass").val('0')
+            $("#deepwork_ass").val('0')
         }
     }
 
