@@ -376,6 +376,42 @@
             data: data10,
         });
 
+        // Weight Loss Posts Graph
+        var ctx11 = document.getElementById("postsChart").getContext("2d");
+        const labels11 = allData.map(x => x.InputDate);
+        const data11 = {
+            labels: labels11,
+            datasets: [{
+                label: 'Posts',
+                data: allData.map(x => x.Posts),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        new Chart(ctx11, {
+            type: 'line',
+            data: data11,
+        });
+
+        // Networking Graph
+        var ctx12 = document.getElementById("networkingChart").getContext("2d");
+        const labels12 = allData.map(x => x.InputDate);
+        const data12 = {
+            labels: labels12,
+            datasets: [{
+                label: 'Networking',
+                data: allData.map(x => x.Networking),
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        new Chart(ctx12, {
+            type: 'line',
+            data: data12,
+        });
+
 
 
     }
@@ -436,11 +472,13 @@
         var sleep = $('#sleep_ass').val();
         var meditation = $('#meditation_ass').val();
         var deepwork = $('#deepwork_ass').val();
+        var posts = $('#posts_ass').val();
+        var networking = $('#networking_ass').val();
 
         var userInputs = {
             'ID': ID, 'inputDate': inputDate, 'breakfast': breakfast, 'lunch': lunch, 'dinner': dinner
             , 'snacks': snacks, 'weight': weight, 'exercise': exercise, 'alcohol': alcohol, 'sleep': sleep, 'meditation': meditation,
-            'deepwork': deepwork
+            'deepwork': deepwork, 'posts': posts, 'networking': networking
         }
         // console.log(userInputs)
         addEntry(userInputs);
@@ -465,7 +503,9 @@
                 Alcohol: userInputs.alcohol,
                 Sleep: userInputs.sleep,
                 Meditation: userInputs.meditation,
-                Deepwork: userInputs.deepwork
+                Deepwork: userInputs.deepwork,
+                Posts: userInputs.posts,
+                Networking: userInputs.networking
             }),
             contentType: 'application/json',
             success: completeAdd,
@@ -539,6 +579,16 @@
             } else {
                 $("#deepwork_ass").val('0')
             }
+            if (allData[index].Posts != undefined) {
+                $("#posts_ass").val(allData[index].Posts)
+            } else {
+                $("#posts_ass").val('0')
+            }
+            if (allData[index].Networking != undefined) {
+                $("#networking_ass").val(allData[index].Networking)
+            } else {
+                $("#networking_ass").val('0')
+            }
 
 
         } else {
@@ -553,6 +603,8 @@
             $("#sleep_ass").val('')
             $("#meditation_ass").val('0')
             $("#deepwork_ass").val('0')
+            $("#posts_ass").val('0')
+            $("#networking_ass").val('0')
         }
     }
 
